@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "rest_framework",
     'users',
 ]
 
@@ -99,8 +100,19 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
+AUTH_AZURE_AD_B2C = {
+    'TENANT': '<your-tenant>.onmicrosoft.com',
+    'CLIENT_ID': '<your-client-id>',
+    'CLIENT_SECRET': '<your-client-secret>',
+    'POLICY_NAME': '<your-policy-name>',
+    'RESPONSE_MODE': 'form_post',
+    'RESPONSE_TYPE': 'code',
+    'SCOPE': 'openid offline_access',
+}
+AUTHENTICATION_BACKENDS = [
+    'users.backends.AzureADB2CBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
